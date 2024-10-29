@@ -41,9 +41,9 @@ function update() {
     }
 
     
-    Thescene.Items[0].RotateSelfY();
-    Thescene.Items[0].RotateSelfX();
-    Thescene.Items[0].RotateSelfZ();
+    //Thescene.Items[0].RotateSelfZ();
+    //Thescene.Items[0].applyTransfer(new Vector3D(0, 0, 1))
+    
     const Triangles = Thescene.itemsTo2D();
 
     
@@ -55,7 +55,8 @@ function update() {
             drawTriangle([x1, y1], [x2, y2], [x3, y3]);
         });
     } else {
-        console.warn("No triangles to draw.");
+       //for debgun if no Triangle
+       //console.log("no triangle")
     }
 
     requestAnimationFrame(update);

@@ -18,6 +18,7 @@ export class Item {
     
     #applyTransformation(matrixFunc) {
         this.triangles.forEach((triangle) => {
+            
             const localMatrix = matrixFunc(this.position, 0.01)
             triangle.vertices.forEach((vertex, index) => {
                 const transformedVertex = multiplyMatrix4_3(localMatrix, vertex);
@@ -40,5 +41,24 @@ export class Item {
     }
     RotateSelfZ(){
         this.#applyTransformation(RotationSelfZ)
+    }
+
+    #transferItem(vector) {
+        this.triangles.forEach((triangle) => {
+            const Vitess = 0.01;
+            triangle.vertices.forEach((vertex, index) => {
+                const transformedVertex = new Vector3D(
+                    vertex.X[0] + vector.X[0] * Vitess,
+                    vertex.Y[0] + vector.Y[0] * Vitess,
+                    vertex.Z[0] + vector.Z[0] * Vitess
+                );
+                triangle.vertices[index] = new Vector3D(transformedVertex.X[0], transformedVertex.Y[0], transformedVertex.Z[0]);
+            });
+        });
+    }
+    
+
+    applyTransfer(vector){
+        this.#transferItem(vector);
     }
 }
