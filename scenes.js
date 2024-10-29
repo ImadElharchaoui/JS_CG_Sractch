@@ -1,31 +1,22 @@
-
+import { multiplyMatrix4_3 } from './matrix'
+import { projectionMatrix, WINDOW_HIGH, WINDOW_WIDTH } from './config';
 
 export class Scene {
     static LastID = 0;
     constructor(){
         
-        this.sceneID = LastID++;
+        this.sceneID = this.LastID++;
         this.Items = [];
         this.Cameras = [];
     }
 
 
     AddItem(params) {
-            items.push(params)
+            this.Items.push(params)
     }
 
 
     itemsTo2D(){
-        this.Items.forEach((item) => {
-            const localRotationMatrix = combineTransformations(item.position, 0.01);
-    
-            item.triangles.forEach((triangle) => {
-                triangle.vertices.forEach((vertex, index) => {
-                    const rotatedVertex = multiplyMatrix4_3(localRotationMatrix, vertex);
-                    triangle.vertices[index] = new Vector3D(rotatedVertex.x, rotatedVertex.y, rotatedVertex.z);
-                });
-            });
-        });
     
         const Triangles = [];
         this.Items.forEach((item) => {

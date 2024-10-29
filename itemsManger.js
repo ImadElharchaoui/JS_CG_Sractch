@@ -5,6 +5,7 @@ import { createTranslationMatrix, createRotationMatrixZ, createRotationMatrixY, 
     // rotation arround himself
         // rotation arround axis Z
 export function RotationSelfZ(position, angle) {
+    
     const translationToOrigin = createTranslationMatrix(-position.X[0], -position.Y[0], -position.Z[0]);
     const rotationMatrix = createRotationMatrixZ(angle);
     const translationBack = createTranslationMatrix(position.X[0], position.Y[0], position.Z[0]);
@@ -15,6 +16,7 @@ export function RotationSelfZ(position, angle) {
 
         // rotation arround axis Y
 export function RotationSelfY(position, angle) {
+    console.log(position, angle)
     const translationToOrigin = createTranslationMatrix(-position.X[0], -position.Y[0], -position.Z[0]);
     const rotationMatrix = createRotationMatrixY(angle);
     const translationBack = createTranslationMatrix(position.X[0], position.Y[0], position.Z[0]);
@@ -35,17 +37,17 @@ export function RotationSelfX(position, angle) {
 
     // rotation arround Axis (X,Y,Z)
         //rotation axis Z
-export function RotationArooundZ(position, angle){
+export function RotationArroundZ(position, angle){
     const rotationMatrix = createRotationMatrixZ(angle);
     return multiplyMatrix4_3(position, rotationMatrix);
 }
         //rotation axis Y
-export function RotationArooundY(position, angle){
+export function RotationArroundY(position, angle){
     const rotationMatrix = createRotationMatrixY(angle);
     return multiplyMatrix4_3(position, rotationMatrix);
 }
         //rotation axis X
-export function RotationArooundX(position, angle){
+export function RotationArroundX(position, angle){
     const rotationMatrix = createRotationMatrixX(angle);
     return multiplyMatrix4_3(position, rotationMatrix);
 }

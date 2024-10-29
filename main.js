@@ -1,6 +1,9 @@
 
 import { WINDOW_HIGH, WINDOW_WIDTH } from "./config";
-import { itemsTo2D } from "./scene";
+import Thescene from "./TestScene";
+import { RotationSelfX, RotationSelfY, RotationSelfZ } from './itemsManger';
+import { Vector3D } from "./Types";
+import { multiplyMatrix4_3 } from './matrix'
 
 const canvas = document.querySelector(".canvas");
 const FPS_display = document.querySelector(".FPS_display");
@@ -37,7 +40,14 @@ function update() {
         FPS_display.textContent = `FPS: ${fps}`;
     }
 
-    const Triangles = itemsTo2D();
+    
+    Thescene.Items[0].RotateSelfY();
+    Thescene.Items[0].RotateSelfX();
+    Thescene.Items[0].RotateSelfZ();
+    const Triangles = Thescene.itemsTo2D();
+
+    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
 
     if (Triangles.length > 0) {

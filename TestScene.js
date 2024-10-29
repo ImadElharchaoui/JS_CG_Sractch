@@ -1,6 +1,9 @@
 import { Colour, Vector3D } from "./Types";
-import 
+import { Scene } from "./scenes";
+import { Cube } from "./objectsItems";
 
+
+const Thescene = new Scene();
 
 
 
@@ -10,7 +13,10 @@ const AcubeColor = new Colour(255, 0, 0);
 const AcubeScale = 2;
 const AcubeRotation = new Vector3D(0, 0, 0);
 
-AddItem(AcubePosition, AcubeColor, AcubeScale, AcubeRotation);
+Thescene.AddItem(new Cube(AcubePosition, AcubeColor, AcubeScale, AcubeRotation));
+
+
+export default Thescene;
 
 
 

@@ -25,47 +25,6 @@ export class Triangle {
     }
 }
 
-export class Cube {
-    constructor(position, color, scale, rotation) {
-        if (!(position instanceof Vector3D) || !(rotation instanceof Vector3D) || !(color instanceof Colour)) {
-            throw new Error("Position and rotation must be of type Vector3D and color of type Colour.");
-        }
-        this.position = position;
-        this.rotation = rotation;
-        this.color = color;
-        this.scale = scale;
-        this.triangles = this.createTriangles();
-    }
-
-    createTriangles() {
-        const s = this.scale / 2;
-        const vertices = [
-            new Vector3D(this.position.X[0] - s, this.position.Y[0] - s, this.position.Z[0] - s),
-            new Vector3D(this.position.X[0] + s, this.position.Y[0] - s, this.position.Z[0] - s),
-            new Vector3D(this.position.X[0] + s, this.position.Y[0] + s, this.position.Z[0] - s),
-            new Vector3D(this.position.X[0] - s, this.position.Y[0] + s, this.position.Z[0] - s),
-            new Vector3D(this.position.X[0] - s, this.position.Y[0] - s, this.position.Z[0] + s),
-            new Vector3D(this.position.X[0] + s, this.position.Y[0] - s, this.position.Z[0] + s),
-            new Vector3D(this.position.X[0] + s, this.position.Y[0] + s, this.position.Z[0] + s),
-            new Vector3D(this.position.X[0] - s, this.position.Y[0] + s, this.position.Z[0] + s)
-        ];
-
-        return [
-            new Triangle(vertices[0], vertices[1], vertices[2], this.color),
-            new Triangle(vertices[0], vertices[2], vertices[3], this.color),
-            new Triangle(vertices[4], vertices[5], vertices[6], this.color),
-            new Triangle(vertices[4], vertices[6], vertices[7], this.color),
-            new Triangle(vertices[0], vertices[3], vertices[7], this.color),
-            new Triangle(vertices[0], vertices[7], vertices[4], this.color),
-            new Triangle(vertices[1], vertices[2], vertices[6], this.color),
-            new Triangle(vertices[1], vertices[6], vertices[5], this.color),
-            new Triangle(vertices[3], vertices[2], vertices[6], this.color),
-            new Triangle(vertices[3], vertices[6], vertices[7], this.color),
-            new Triangle(vertices[0], vertices[1], vertices[5], this.color),
-            new Triangle(vertices[0], vertices[5], vertices[4], this.color)
-        ];
-    }
-}
 
 export class Camera {
     constructor(position = new Vector3D(0, 0, 0), rotation = new Vector3D(0, 0, 0)) {
