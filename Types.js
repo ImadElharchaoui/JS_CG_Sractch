@@ -77,15 +77,3 @@ export class Camera {
     }
 }
 
-export function multiplyMatrix4_3(matrix, vector) {
-    const [x, y, z, w] = vector.toVector4();
-
-    const xPrime = matrix[0][0] * x + matrix[0][1] * y + matrix[0][2] * z + matrix[0][3] * w;
-    const yPrime = matrix[1][0] * x + matrix[1][1] * y + matrix[1][2] * z + matrix[1][3] * w;
-    const zPrime = matrix[2][0] * x + matrix[2][1] * y + matrix[2][2] * z + matrix[2][3] * w;
-    const wPrime = matrix[3][0] * x + matrix[3][1] * y + matrix[3][2] * z + matrix[3][3] * w;
-
-    return wPrime !== 0
-        ? { x: xPrime / wPrime, y: yPrime / wPrime, z: zPrime / wPrime }
-        : { x: 0, y: 0, z: 0 };
-}
