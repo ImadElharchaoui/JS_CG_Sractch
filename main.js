@@ -1,9 +1,8 @@
 
 import { WINDOW_HIGH, WINDOW_WIDTH } from "./config";
 import Thescene from "./TestScene";
-import { RotationSelfX, RotationSelfY, RotationSelfZ } from './itemsManger';
+import { initInputSystem, isKeyPressed } from "./inputSystem";
 import { Vector3D } from "./Types";
-import { multiplyMatrix4_3 } from './matrix'
 
 const canvas = document.querySelector(".canvas");
 const FPS_display = document.querySelector(".FPS_display");
@@ -28,6 +27,9 @@ let lastFrameTime = 0;
 let frameCount = 0;
 let fps = 0;
 
+//intial function of Start
+initInputSystem()
+
 function update() {
     const currentTime = Date.now();
     const deltaTime = currentTime - lastFrameTime;
@@ -42,11 +44,32 @@ function update() {
 
     
     //Thescene.Items[0].RotateSelfZ();
-    //Thescene.Items[0].applyTransfer(new Vector3D(0, 0, 1))
-    
-    const Triangles = Thescene.itemsTo2D();
+    //Thescene.Items[0].RotateSelfY();
+    //Thescene.Items[0].RotateSelfX();
+    //Thescene.Items[0].applyTransfer(new Vector3D(0, 1, 0))
 
     
+    if (isKeyPressed("w")) {
+        Thescene.Items[0].applyTransfer(new Vector3D(0, 0, 1));
+    }
+    if (isKeyPressed("s")) {
+        Thescene.Items[0].applyTransfer(new Vector3D(0, 0, -1));
+    }
+    if (isKeyPressed("d")) {
+        Thescene.Items[0].applyTransfer(new Vector3D(1, 0, 0));
+    }
+    if (isKeyPressed("a")) {
+        Thescene.Items[0].applyTransfer(new Vector3D(-1, 0, 0));
+    }if(isKeyPressed(" ")){
+        
+    }
+    
+    
+    
+    const Triangles = Thescene.itemsTo2D();
+    
+    
+
 
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
 

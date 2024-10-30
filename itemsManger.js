@@ -5,7 +5,6 @@ import { createTranslationMatrix, createRotationMatrixZ, createRotationMatrixY, 
     // rotation arround himself
         // rotation arround axis Z
 export function RotationSelfZ(position, angle) {
-    
     const translationToOrigin = createTranslationMatrix(-position.X[0], -position.Y[0], -position.Z[0]);
     const rotationMatrix = createRotationMatrixZ(angle);
     const translationBack = createTranslationMatrix(position.X[0], position.Y[0], position.Z[0]);
@@ -16,7 +15,6 @@ export function RotationSelfZ(position, angle) {
 
         // rotation arround axis Y
 export function RotationSelfY(position, angle) {
-    console.log(position, angle)
     const translationToOrigin = createTranslationMatrix(-position.X[0], -position.Y[0], -position.Z[0]);
     const rotationMatrix = createRotationMatrixY(angle);
     const translationBack = createTranslationMatrix(position.X[0], position.Y[0], position.Z[0]);
@@ -55,12 +53,15 @@ export function RotationArroundX(position, angle){
 
 // Move items
 
-export function Moveitem(position, vector){
-    position.X += vector.X;
-    position.Y += vector.Y;
-    position.Z += vector.Z;
+export function Moveitem(position, vector, vitess) {
+    
+    position.X = Number(position.X) + Number(vector.X) * vitess;
+    position.Y = Number(position.Y) + Number(vector.Y) * vitess;
+    position.Z = Number(position.Z) + Number(vector.Z) * vitess;
+    
     return position;
 }
+
 
 export function Scaleitem(position, scale){
     const scaleMatrix = [

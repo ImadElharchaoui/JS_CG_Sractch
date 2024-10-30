@@ -1,6 +1,6 @@
 import { Colour, Vector3D } from "./Types";
 import { Scene } from "./scenes";
-import { Cube } from "./objectsItems";
+import { Cube } from "./objectsItems.js";
 
 
 const Thescene = new Scene();

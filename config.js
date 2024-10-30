@@ -1,6 +1,6 @@
 
-export const WINDOW_HIGH = 480;
-export const WINDOW_WIDTH = 960;
+export const WINDOW_HIGH = window.innerHeight - 100;
+export const WINDOW_WIDTH = window.innerWidth - 30;
 export const FOV = 90;
 const aspect = WINDOW_WIDTH / WINDOW_HIGH;
 const Z_near = 0;
