@@ -1,7 +1,7 @@
 
 export const WINDOW_HIGH = window.innerHeight - 100;
 export const WINDOW_WIDTH = window.innerWidth - 30;
-export const FOV = 90;
+export const FOV = 120;
 const aspect = WINDOW_WIDTH / WINDOW_HIGH;
 const Z_near = 0;
 const Z_far = 1000;

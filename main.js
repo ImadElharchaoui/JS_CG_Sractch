@@ -3,6 +3,7 @@ import { WINDOW_HIGH, WINDOW_WIDTH } from "./config";
 import Thescene from "./TestScene";
 import { initInputSystem, isKeyPressed } from "./inputSystem";
 import { Vector3D } from "./Types";
+import { SoundSystem } from "./soundSystem";
 
 const canvas = document.querySelector(".canvas");
 const FPS_display = document.querySelector(".FPS_display");
@@ -11,6 +12,8 @@ canvas.width = WINDOW_WIDTH;
 canvas.height = WINDOW_HIGH;
 
 const ctx = canvas.getContext("2d");
+
+const soundSystem = new SoundSystem();
 
 function drawTriangle([x1, y1], [x2, y2], [x3, y3], color = "#FF0000") {
     ctx.beginPath();
@@ -23,12 +26,26 @@ function drawTriangle([x1, y1], [x2, y2], [x3, y3], color = "#FF0000") {
     ctx.stroke();
 }
 
+async function initSoundSystem() {
+    initInputSystem();
+    
+   
+    await soundSystem.addSound("background", "./materiels/sounds/MusicBackground.mp3");
+    
+   
+    soundSystem.playLoop("background");
+}
+
+
+
+
 let lastFrameTime = 0;
 let frameCount = 0;
 let fps = 0;
 
 //intial function of Start
 initInputSystem()
+initSoundSystem();
 
 function update() {
     const currentTime = Date.now();
@@ -61,7 +78,7 @@ function update() {
     if (isKeyPressed("a")) {
         Thescene.Items[0].applyTransfer(new Vector3D(-1, 0, 0));
     }if(isKeyPressed(" ")){
-        
+        Thescene.Items[0].applyTransfer(new Vector3D(0, 1, 0))
     }
     
     
