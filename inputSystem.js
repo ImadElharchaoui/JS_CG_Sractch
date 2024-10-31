@@ -4,11 +4,11 @@ const keysPressed = {};
 // Initializes the input listeners
 export function initInputSystem() {
     document.addEventListener("keydown", (event) => {
-        keysPressed[event.key] = true;
+        keysPressed[event.key.toLowerCase()] = true;
     });
 
     document.addEventListener("keyup", (event) => {
-        keysPressed[event.key] = false;
+        keysPressed[event.key.toLowerCase()] = false;
     });
 }
 

@@ -22,8 +22,8 @@ export class Scene {
         this.Items.forEach((item) => {
             item.triangles.forEach((triangle) => {
                 const Points = [];
-    
                 triangle.vertices.forEach((vertex) => {
+                    
                     const point = multiplyMatrix4_3(projectionMatrix, vertex);
                     
                     if (point.x >= -1 && point.y >= -1 && point.x <= 1 && point.y <= 1) {
