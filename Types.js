@@ -1,3 +1,5 @@
+import { createRotationMatrixX, createRotationMatrixY, createRotationMatrixZ, multiplyMatrices } from "./matrix.js"
+
 export class Vector3D {
     constructor(x, y, z) {
         this.X = new Float32Array([x]);
@@ -34,5 +36,15 @@ export class Camera {
         this.position = position;
         this.rotation = rotation;
     }
+
+    // Returns a combined rotation matrix based on current rotation angles
+    getRotationMatrix() {
+        const rotationX = createRotationMatrixX(this.rotation.X);
+        const rotationY = createRotationMatrixY(this.rotation.Y);
+        const rotationZ = createRotationMatrixZ(this.rotation.Z);
+        // Combine rotations in order Z -> Y -> X
+        return multiplyMatrices(multiplyMatrices(rotationZ, rotationY), rotationX);
+    }
 }
+
 

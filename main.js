@@ -5,6 +5,7 @@ import { Vector3D } from "./Types";
 import { SoundSystem } from "./soundSystem";
 import { UIElement, UISystem } from "./UISystem";
 import { OBJLoader } from "./loadObj"; // Import the OBJLoader
+import { transformAndProject } from './matrix'
 
 const canvas = document.querySelector(".canvas");
 const FPS_display = document.querySelector(".FPS_display");
@@ -112,8 +113,9 @@ function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Render your 3D scene or other elements
-    const Triangles = Thescene.itemsTo2D();
-    
+    const camera = Thescene.Cameras[0]; // Use the first camera in the scene
+    const Triangles = Thescene.itemsTo2D()
+
     if (Triangles.length > 0) {
         Triangles.forEach(([[x1, y1], [x2, y2], [x3, y3]]) => {
             drawTriangle([x1, y1], [x2, y2], [x3, y3]);

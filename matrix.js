@@ -1,3 +1,6 @@
+import { projectionMatrix } from './config'
+import { Vector3D } from './Types';
+
 // Helper to create a translation matrix
 export function createTranslationMatrix(tx, ty, tz) {
     return [
@@ -23,6 +26,7 @@ export function multiplyMatrices(matA, matB) {
 }
 
 export function multiplyMatrix4_3(matrix, vector) {
+    
     const [x, y, z, w] = vector.toVector4();
 
     const xPrime = matrix[0][0] * x + matrix[0][1] * y + matrix[0][2] * z + matrix[0][3] * w;
@@ -65,4 +69,21 @@ export function createRotationMatrixX(angle) {
         [0, 0, 0, 1]
     ];
 }
+
+
+export function transformAndProject(point, camera) {
+    
+    // Translate the point based on the camera position (inverse translation)
+    const translationMatrix = createTranslationMatrix(-camera.position.X, -camera.position.Y, -camera.position.Z);
+    // Rotate based on the camera’s rotation
+    const rotationMatrix = camera.getRotationMatrix();
+    // Combine translation and rotation
+    const cameraTransformMatrix = multiplyMatrices(rotationMatrix, translationMatrix);
+    // Apply the combined transformation
+    const transformedPoint = multiplyMatrix4_3(cameraTransformMatrix, point);
+    // Project to 2D
+
+    return multiplyMatrix4_3(projectionMatrix, new Vector3D(transformedPoint.x, transformedPoint.y, transformedPoint.z));
+}
+
 
