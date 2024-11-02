@@ -4,6 +4,7 @@ const keysPressed = {};
 // Initializes the input listeners
 export function initInputSystem() {
     document.addEventListener("keydown", (event) => {
+        console.log(event.key)
         keysPressed[event.key.toLowerCase()] = true;
     });
 

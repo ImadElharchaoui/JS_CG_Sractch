@@ -27,7 +27,6 @@ export class Triangle {
     }
 }
 
-
 export class Camera {
     constructor(position = new Vector3D(0, 0, 0), rotation = new Vector3D(0, 0, 0)) {
         if (!(position instanceof Vector3D) || !(rotation instanceof Vector3D)) {
@@ -35,16 +34,60 @@ export class Camera {
         }
         this.position = position;
         this.rotation = rotation;
+        this.speed = 10; // Movement speed
+        this.rotationSpeed = 0.05; // Rotation speed
     }
 
-    // Returns a combined rotation matrix based on current rotation angles
+    // Returns the combined rotation matrix based on current rotation
     getRotationMatrix() {
         const rotationX = createRotationMatrixX(this.rotation.X);
         const rotationY = createRotationMatrixY(this.rotation.Y);
         const rotationZ = createRotationMatrixZ(this.rotation.Z);
-        // Combine rotations in order Z -> Y -> X
         return multiplyMatrices(multiplyMatrices(rotationZ, rotationY), rotationX);
     }
+
+    // Move in the forward direction based on the camera’s current rotation
+    moveForward() {
+        const rotationMatrix = this.getRotationMatrix();
+        this.position.X += rotationMatrix[2][0] * this.speed;
+        this.position.Y += rotationMatrix[2][1] * this.speed;
+        this.position.Z += rotationMatrix[2][2] * this.speed;
+    }
+
+    moveBackward() {
+        const rotationMatrix = this.getRotationMatrix();
+        this.position.X -= rotationMatrix[2][0] * this.speed;
+        this.position.Y -= rotationMatrix[2][1] * this.speed;
+        this.position.Z -= rotationMatrix[2][2] * this.speed;
+    }
+
+    strafeRight() {
+        const rotationMatrix = this.getRotationMatrix();
+        this.position.X += rotationMatrix[0][0] * this.speed;
+        this.position.Y += rotationMatrix[0][1] * this.speed;
+        this.position.Z += rotationMatrix[0][2] * this.speed;
+    }
+
+    strafeLeft() {
+        const rotationMatrix = this.getRotationMatrix();
+        this.position.X -= rotationMatrix[0][0] * this.speed;
+        this.position.Y -= rotationMatrix[0][1] * this.speed;
+        this.position.Z -= rotationMatrix[0][2] * this.speed;
+    }
+
+    rotateRight() {
+        this.rotation.Y -= this.rotationSpeed;
+    }
+
+    rotateLeft() {
+        this.rotation.Y += this.rotationSpeed;
+    }
+
+    lookUp() {
+        this.rotation.X = Math.max(this.rotation.X - this.rotationSpeed, -Math.PI / 2);
+    }
+
+    lookDown() {
+        this.rotation.X = Math.min(this.rotation.X + this.rotationSpeed, Math.PI / 2);
+    }
 }
-
-

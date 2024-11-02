@@ -79,6 +79,37 @@ async function loadOBJModel() {
     }
 }
 
+function updateCamera() {
+    if (isKeyPressed("w")) {
+        
+        Thescene.Cameras[0].moveForward();
+    }
+    if (isKeyPressed("s")) {
+        Thescene.Cameras[0].moveBackward();
+    }
+    if (isKeyPressed("d")) {
+        
+        Thescene.Cameras[0].strafeLeft();
+    }
+    if (isKeyPressed("a")) {
+        Thescene.Cameras[0].strafeRight();
+    }
+
+    // Rotate camera with additional keys (e.g., 'A' for left, 'D' for right)
+    if (isKeyPressed("j")) {
+        Thescene.Cameras[0].rotateLeft();
+    }
+    if (isKeyPressed("l")) {
+        Thescene.Cameras[0].rotateRight();
+    }
+    if (isKeyPressed("i")) {
+        Thescene.Cameras[0].lookUp();
+    }
+    if (isKeyPressed("k")) {
+        Thescene.Cameras[0].lookDown();
+    }
+}
+
 function update() {
     const currentTime = Date.now();
     const deltaTime = currentTime - lastFrameTime;
@@ -92,7 +123,7 @@ function update() {
     }
 
     
-
+    /*
     if (isKeyPressed("w")) {
         Thescene.Items[0].applyTransfer(new Vector3D(0, 0, 50));
     }
@@ -108,12 +139,13 @@ function update() {
     if (isKeyPressed(" ")) {
         Thescene.Items[0].applyTransfer(new Vector3D(0, 1, 0));
     }
+    */
+    updateCamera();
 
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Render your 3D scene or other elements
-    const camera = Thescene.Cameras[0]; // Use the first camera in the scene
     const Triangles = Thescene.itemsTo2D()
 
     if (Triangles.length > 0) {
